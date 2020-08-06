@@ -4,6 +4,8 @@ import NavBar from './NavBar';
 import Home from './Home';
 import Signup from './Signup';
 import Signin from './Signin';
+import MyProfile from './MyProfile';
+import MyStrains from './MyStrains';
 import _ from 'lodash';
 
 
@@ -27,30 +29,32 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      PRODUCT_URL: `${BACK_END_URL}/products`,
+      STRAIN_URL: `${BACK_END_URL}/strains`,
       USER_URL: `${BACK_END_URL}/users`,
       isLoggedIn: false,
       setAuth: false,
       user: {},
       users: [],
-      products: [],
+      strains: [],
      };
 
+    this.fetchStrains = this.fetchStrains.bind(this);
     this.fetchUsers = this.fetchUsers.bind(this);
     this.readCookie = this.readCookie.bind(this);
+    this.fetchStrains();
     this.fetchUsers();
     this.readCookie();
   }
 
-  viewProduct(product_id) {
-    this.setState({ productSelect: product_id })
+  viewStrain(strain_id) {
+    this.setState({ strainSelect: strain_id })
   }
 
-  fetchProducts() {
-    axios.get(this.state.PRODUCT_URL)
+  fetchStrains() {
+    axios.get(this.state.STRAIN_URL)
       .then(response => {
         if (response.data) {
-          this.setState({ products: response.data });
+          this.setState({ strains: response.data });
 
         } else {
           this.setState({
@@ -136,7 +140,15 @@ class App extends Component {
                     <Signup {...props} handleLogin={this.handleLogin} loggedInStatus={this.state.isLoggedIn}/>)}
                   />
                   <Route exact path='/sign-in' render={props => (
-                    <Signin handleLogin={this.handleLogin} readCookie={this.readCookie} loggedInStatus={this.state.isLoggedIn}/>)}
+                    <Signin {...props} handleLogin={this.handleLogin} readCookie={this.readCookie} loggedInStatus={this.state.isLoggedIn}/>)}
+                  />
+                  <Route exact path='/profile' render={props => (
+                    <MyProfile {...props} user={this.state.user} readCookie={this.readCookie}
+                    loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
+                  />
+                  <Route exact path='/my-strains' render={props => (
+                    <MyStrains {...props} user={this.state.user} readCookie={this.readCookie}
+                    loggedInStatus={this.state.isLoggedIn} viewStrain={this.viewStrain} />)}
                   />
                   <Route exact path='/' render={props => (
                     <Home handleLogout={this.handleLogout} {...this.state} loggedInStatus={this.state.isLoggedIn} />)}

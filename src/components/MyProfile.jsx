@@ -1,6 +1,5 @@
 import React, {useState, Component}  from 'react';
 import { Redirect } from 'react-router-dom';
-import './MyProfile.css';
 import axios from 'axios';
 import { render } from '@testing-library/react';
 import { config } from '../Constants' // get prod/dev urls
