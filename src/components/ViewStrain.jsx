@@ -7,9 +7,43 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
-import Table from 'react-bootstrap/Table'
+import Table from 'react-bootstrap/Table';
+import Card from 'react-bootstrap/Card';
+import {Editor, EditorState, RichUtils} from 'draft-js';
+import 'draft-js/dist/Draft.css';
 import { config } from '../Constants' // get prod/dev urls
 let BACK_END_URL = config.url.API_URL;
+
+
+function getCurrentBlock(editorState) {
+    const currentSelection = editorState.getSelection();
+    const blockKey = currentSelection.getStartKey();
+    return(editorState.getCurrentContent().getBlockForKey(blockKey));
+}
+
+function getCurrentLetter(editorState) {
+    const currentBlock = getCurrentBlock(editorState);
+    const blockText = currentBlock.getText();
+    return blockText[editorState.getSelection().getStartOffset() - 1];
+}
+
+function EditorWrapper() {
+    const [editorState, setEditorState] = useState(EditorState.createEmpty());
+    const onChange = (newEditorState) => {
+        const letter = getCurrentLetter(newEditorState);
+        if (getCurrentBlock(newEditorState).getText().length > 9) {
+            setEditorState(editorState);
+            return;
+        }
+        setEditorState(newEditorState)
+    }
+    return (
+        <Editor
+            editorState={editorState}
+            onChange={onChange}
+        />
+    );
+}
 
 const ViewStrain = function (props) {
   const [strain, setStrain] = useState([]);
@@ -34,7 +68,6 @@ const ViewStrain = function (props) {
       </Container>
       <svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
        <g>
-        <title>Layer 1</title>
         <line stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_1" y2="149.45313" x2="388" y1="54.45313" x1="388" stroke-width="1.5" fill="none"/>
         <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_2" y2="149.45313" x2="597" y1="148.45313" x1="181" stroke-width="1.5" stroke="#000" fill="none"/>
         <line stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_3" y2="149.45313" x2="597" y1="268.45313" x1="597" stroke-width="1.5" fill="none"/>
@@ -47,42 +80,47 @@ const ViewStrain = function (props) {
         <line stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_10" y2="354.45313" x2="698" y1="269.45312" x1="698" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="none"/>
        </g>
       </svg>
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Mating Type</th>
-            <th>Morphology</th>
-            <th>Genetically Modified?</th>
-            <th>Child Strain?</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{ name }</td>
-            <td>{ mating_type }</td>
-            <td>{ morphology }</td>
-            <td>{ gm ? "yes" : "no" }</td>
-            <td>{ is_child ? "yes" : "no" }</td>
-          </tr>
-        </tbody>
-      </Table>
-      <Table striped bordered hover size="sm">
-        <thead>
-          <tr>
-            <th>Acid Tolerance</th>
-            <th>Fermentation Rate</th>
-            <th>Traits</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{ acid_tolerance }</td>
-            <td>{ ferment_rate }</td>
-            <td>{ traits }</td>
-          </tr>
-        </tbody>
-      </Table>
+      <div className="col py-3 px-md-5 bordered">
+        <Table striped bordered hover size="sm">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Mating Type</th>
+              <th>Morphology</th>
+              <th>Genetically Modified?</th>
+              <th>Child Strain?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{ name }</td>
+              <td>{ mating_type }</td>
+              <td>{ morphology }</td>
+              <td>{ gm ? "yes" : "no" }</td>
+              <td>{ is_child ? "yes" : "no" }</td>
+            </tr>
+          </tbody>
+        </Table>
+        <Table striped bordered hover size="sm">
+          <thead>
+            <tr>
+              <th>Acid Tolerance</th>
+              <th>Fermentation Rate</th>
+              <th>Traits</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{ acid_tolerance }</td>
+              <td>{ ferment_rate }</td>
+              <td>{ traits }</td>
+            </tr>
+          </tbody>
+        </Table>
+        <Card>
+          <Card.Body><h5 className="pull-left">Lab Notes...</h5><EditorWrapper /></Card.Body>
+        </Card>
+      </div>
     </div>
   );
 
