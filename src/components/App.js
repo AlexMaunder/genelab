@@ -8,6 +8,7 @@ import MyProfile from './MyProfile';
 import MyStrains from './MyStrains';
 import AddStrain from './AddStrain';
 import ViewStrain from './ViewStrain';
+import BuyStrain from './BuyStrain';
 import _ from 'lodash';
 
 
@@ -151,6 +152,10 @@ class App extends Component {
                   <Route exact path='/my-strains' render={props => (
                     <MyStrains {...props} {...this.state} user={this.state.user} readCookie={this.readCookie}
                     loggedInStatus={this.state.isLoggedIn} viewStrain={this.viewStrain} />)}
+                  />
+                  <Route exact path='/buy-strains' render={props => (
+                    <BuyStrain {...props} {...this.state} user={this.state.user} readCookie={this.readCookie}
+                    loggedInStatus={this.state.isLoggedIn} />)}
                   />
                   <Route exact path='/add-strain' render={props => (
                     <AddStrain {...props} {...this.state} user={this.state.user} readCookie={this.readCookie}

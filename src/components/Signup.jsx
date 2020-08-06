@@ -81,6 +81,7 @@ class Signup extends Component{
                                       placeholder="Email"
                                       onChange={this.handleChange}
                                       value={this.state.email}
+                                      required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -93,6 +94,7 @@ class Signup extends Component{
                                       placeholder="Password"
                                       onChange={this.handleChange}
                                       value={this.state.password}
+                                      required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -105,6 +107,7 @@ class Signup extends Component{
                                       placeholder="Password"
                                       onChange={this.handleChange}
                                       value={this.state.password_confirmation}
+                                      required
                                     />
                                 </div>
                                 <button type="submit" id="submit-btn" className="btn btn-primary">Submit</button>

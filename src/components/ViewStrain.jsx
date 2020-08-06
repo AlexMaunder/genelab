@@ -118,8 +118,9 @@ const ViewStrain = function (props) {
           </tbody>
         </Table>
         <Card>
-          <Card.Body><h5 className="pull-left">Lab Notes...</h5><EditorWrapper /></Card.Body>
+          <Card.Body><h5 className="text-left">Lab Notes...</h5><EditorWrapper /></Card.Body>
         </Card>
+        <img className="w-100 img-thumbnail" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Bacterial_growth_en.svg/1200px-Bacterial_growth_en.svg.png" alt="bacterial growth rate"/>
       </div>
     </div>
   );

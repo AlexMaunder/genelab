@@ -30,6 +30,9 @@ class NavBar extends Component{
                                 <Link to='/my-strains' className="nav-link">My Strains</Link>
                             </li>
                             <li className="nav-item">
+                                <Link to='/buy-strains' className="nav-link">Buy Strains</Link>
+                            </li>
+                            <li className="nav-item">
                                 <Link to='/profile' className="nav-link">My Profile</Link>
                             </li>
                         </ul>
