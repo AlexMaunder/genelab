@@ -67,7 +67,7 @@ class Signup extends Component{
         return(
             <div className='row justify-content-md-center'>
                 <div className="col-md-6">
-                    <div className="card">
+                    <div className="card bg-dark text-white">
                         <div className="card-body">
                             <h2 className = "center">Sign Up</h2>
                               <form onSubmit={this.handleSubmit}>

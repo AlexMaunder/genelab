@@ -7,6 +7,7 @@ import Signin from './Signin';
 import MyProfile from './MyProfile';
 import MyStrains from './MyStrains';
 import AddStrain from './AddStrain';
+import ViewStrain from './ViewStrain';
 import _ from 'lodash';
 
 
@@ -155,9 +156,9 @@ class App extends Component {
                     <AddStrain {...props} {...this.state} user={this.state.user} readCookie={this.readCookie}
                     loggedInStatus={this.state.isLoggedIn} viewStrain={this.viewStrain} />)}
                   />
-                  <Route exact path='/view-strain' render={props => (
-                    <AddStrain {...props} {...this.state} user={this.state.user} readCookie={this.readCookie}
-                    loggedInStatus={this.state.isLoggedIn} viewStrain={this.viewStrain} />)}
+                  <Route path={"/view-strain/:strainId"} render={props => (
+                    <ViewStrain {...props} {...this.state} user={this.state.user} readCookie={this.readCookie}
+                    loggedInStatus={this.state.isLoggedIn} />)}
                   />
                   <Route exact path='/' render={props => (
                     <Home handleLogout={this.handleLogout} {...this.state} loggedInStatus={this.state.isLoggedIn} />)}

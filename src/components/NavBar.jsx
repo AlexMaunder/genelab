@@ -11,7 +11,7 @@ let BACK_END_URL = config.url.API_URL;
 class NavBar extends Component{
     render(){
         return(
-            <nav className="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark static-top mb-5 shadow">
                 <Link to="/" className="navbar-brand">GeneLab</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                     aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

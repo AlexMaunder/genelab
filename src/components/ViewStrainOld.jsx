@@ -7,7 +7,7 @@ import { config } from '../Constants' // get prod/dev urls
 let FRONT_END_URL = config.url.FRONT_END_URL;
 let BACK_END_URL = config.url.API_URL;
 
-class AddStrain extends Component{
+class ViewStrain extends Component{
 
   constructor(props) {
     super(props);
@@ -208,4 +208,4 @@ class AddStrain extends Component{
 }
 
 
-export default AddStrain;
+export default ViewStrain;

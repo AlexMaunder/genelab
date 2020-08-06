@@ -1,211 +1,91 @@
-import React, {useState, Component}  from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+// import _, { uniq } from 'underscore';
 import axios from 'axios';
-import _ from "lodash";
-import { render } from '@testing-library/react';
+// import SearchResults from 'react-filter-search';
+import { Link } from 'react-router-dom';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Image from 'react-bootstrap/Image';
+import Table from 'react-bootstrap/Table'
 import { config } from '../Constants' // get prod/dev urls
-let FRONT_END_URL = config.url.FRONT_END_URL;
 let BACK_END_URL = config.url.API_URL;
 
-class AddStrain extends Component{
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: '',
-      mating_type: '',
-      morphology: '',
-      gm:'',
-      is_child:'',
-      acid_tolerance:'',
-      ferment_rate:'',
-      traits:'',
-      image:'',
-      errors: '',
-      isChange: false,
-      SERVER_URL: BACK_END_URL
-     };
-     this.redirect = this.redirect.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({
-      email: this.props.user.email,
-    })
-  }
-
-  handleChange = (event) => {
-    const {name, value} = event.target
-    this.setState({
-      [name]: value
-    })
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-    const {name, mating_type, morphology, gm, is_child, acid_tolerance, ferment_rate, traits, image} = this.state
-    let user = {
-      name: name,
-      mating_type: mating_type,
-      morphology: morphology,
-      gm: gm,
-      is_child: is_child,
-      acid_tolerance: acid_tolerance,
-      ferment_rate: ferment_rate,
-      traits: traits,
-      image: image
-    }
-    axios.patch(`${BACK_END_URL}/strains/new/${this.props.user.id}.json`, user, {withCredentials: true})
-    .then(response => {
-      console.log(response)
-      this.setState ({
-        isChange: true
+const ViewStrain = function (props) {
+  const [strain, setStrain] = useState([]);
+  const strainId = props.match.params.strainId
+  useEffect( () => {
+    axios.get(`http://localhost:3000/strains/${ strainId }`)
+      .then(response => {
+        console.log(response);
+        setStrain(response.data); // [0] for id
       })
-      // update user details
-      this.props.handleUserEdit(response.data);
-      this.props.handleLogin(response.data)
-    })
+      .catch(error => {
+        console.log(error);
+      })
+  }, []) // fetch data only once
+  console.log(strain)
+  const { id, name, mating_type, morphology, gm, is_child, acid_tolerance, ferment_rate, traits, image } = strain
 
-    .catch(error => console.log('api errors:', error))
-  };
+  return (
+    <div key={ id }>
+      <Container>
+        <img className="w-25 img-thumbnail" src={ image } alt={ id }/>
+      </Container>
+      <svg width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+       <g>
+        <title>Layer 1</title>
+        <line stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_1" y2="149.45313" x2="388" y1="54.45313" x1="388" stroke-width="1.5" fill="none"/>
+        <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_2" y2="149.45313" x2="597" y1="148.45313" x1="181" stroke-width="1.5" stroke="#000" fill="none"/>
+        <line stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_3" y2="149.45313" x2="597" y1="268.45313" x1="597" stroke-width="1.5" fill="none"/>
+        <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_4" y2="148.45313" x2="182" y1="263.45313" x1="182" stroke-width="1.5" stroke="#000" fill="none"/>
+        <line stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_5" y2="264.45313" x2="281" y1="263.45313" x1="83" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="none"/>
+        <line stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_6" y2="269.45313" x2="699" y1="269.45313" x1="499" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="none"/>
+        <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_7" y2="346.45313" x2="83" y1="264.45313" x1="83" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="none"/>
+        <line stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_8" y2="345.45313" x2="281" y1="264.45313" x1="281" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" stroke="#000" fill="none"/>
+        <line stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_9" y2="351.45313" x2="499" y1="270.45313" x1="499" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="none"/>
+        <line stroke="#000" stroke-linecap="undefined" stroke-linejoin="undefined" id="svg_10" y2="354.45313" x2="698" y1="269.45312" x1="698" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="none"/>
+       </g>
+      </svg>
+      <Table striped bordered hover size="sm">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Mating Type</th>
+            <th>Morphology</th>
+            <th>Genetically Modified?</th>
+            <th>Child Strain?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{ name }</td>
+            <td>{ mating_type }</td>
+            <td>{ morphology }</td>
+            <td>{ gm ? "yes" : "no" }</td>
+            <td>{ is_child ? "yes" : "no" }</td>
+          </tr>
+        </tbody>
+      </Table>
+      <Table striped bordered hover size="sm">
+        <thead>
+          <tr>
+            <th>Acid Tolerance</th>
+            <th>Fermentation Rate</th>
+            <th>Traits</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{ acid_tolerance }</td>
+            <td>{ ferment_rate }</td>
+            <td>{ traits }</td>
+          </tr>
+        </tbody>
+      </Table>
+    </div>
+  );
 
-  redirect = () => {
-    this.props.history.push('/')
-  }
+};
 
-  handleErrors = () => {
-    return (
-      <div>
-        <ul>{this.state.errors.map((error) => {
-          return <li key={error}>{error}</li>
-        })}
-        </ul>
-      </div>
-    )
-  }
-
-  render(){
-
-    return(
-      this.props.isLoggedIn ?
-      <div className='row justify-content-md-center'>
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-body">
-              <h2 className = "center">Add a new Strain</h2>
-                <form onSubmit={this.handleSubmit}>
-                  <div className="form-group">
-                    <label for="strainname">Strain Name</label>
-                    <input
-                      className="form-control"
-                      name="name"
-                      type="strainname"
-                      id="strainname"
-                      placeholder="S. Cerevisiae"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label for="mating_type">Mating Type</label>
-                    <input
-                      className="form-control"
-                      type="mating_type"
-                      name="mating_type"
-                      id="mating_type"
-                      placeholder="alpha"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label for="morphology">Morphology</label>
-                    <input
-                      className="form-control"
-                      type="morphology"
-                      name="morphology"
-                      id="morphology"
-                      placeholder="rod shaped"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label for="gm">Genetically Modified?</label>
-                    <input
-                      className="form-control"
-                      type="checkbox"
-                      name="gm"
-                      id="gm"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label for="is_child">Child Strain?</label>
-                    <input
-                      className="form-control"
-                      type="checkbox"
-                      name="is_child"
-                      id="is_child"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label for="acid_tolerance">Acid Tolerance</label>
-                    <input
-                      className="form-control"
-                      type="acid_tolerance"
-                      name="acid_tolerance"
-                      id="acid_tolerance"
-                      placeholder="4.0"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label for="ferment_rate">Fermentation Rate (hours)</label>
-                    <input
-                      className="form-control"
-                      type="ferment_rate"
-                      name="ferment_rate"
-                      id="ferment_rate"
-                      placeholder="0.2"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label for="traits">Unique Strain Traits</label>
-                    <input
-                      className="form-control"
-                      type="traits"
-                      name="traits"
-                      id="traits"
-                      placeholder="cellulolytic, high acid tolerance"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label for="image">Add an Image</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      name="image"
-                      id="image"
-                      placeholder="http://fillmurray.com/400/400"
-                      onChange={this.handleChange}
-                    />
-                  </div>
-                  <button type="submit" id="submit-btn" className="btn btn-primary">Create</button>
-                </form>
-                <div>
-                  {this.state.errors ? this.handleErrors() : null}
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
-      :
-      < Redirect to='/' />
-    )
-  }
-
-}
-
-
-export default AddStrain;
+export default ViewStrain;

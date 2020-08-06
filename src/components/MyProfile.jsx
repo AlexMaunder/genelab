@@ -40,8 +40,7 @@ class MyProfile extends Component{
     let user = {
       email: email,
       password: password,
-      password_confirmation: password_confirmation,
-      location: location
+      password_confirmation: password_confirmation
     }
     axios.patch(`${BACK_END_URL}/users/${this.props.user.id}.json`, user, {withCredentials: true})
     .then(response => {
@@ -79,7 +78,7 @@ class MyProfile extends Component{
       this.state.isChange ? < Redirect to='/' /> :
       <div className='row justify-content-md-center'>
         <div className="col-md-6">
-          <div className="card">
+          <div className="card bg-dark text-white">
             <div className="card-body">
               <h2 className = "center">Update User Details</h2>
                 <form onSubmit={this.handleSubmit}>
