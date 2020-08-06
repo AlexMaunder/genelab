@@ -30,7 +30,7 @@ class MyStrains extends Component{
     }
   }
 
-  showProducts(strainsArray) {
+  showStrains(strainsArray) {
       if(strainsArray) {
           return(
               strainsArray.map((strain) => {
@@ -44,7 +44,7 @@ class MyStrains extends Component{
                       <p>{strain.traits}...</p>
                       <p>Created: {Math.floor(Math.abs(new Date() - new Date(strain.created_at))/1000/60/60/24)} days ago</p>
                       {this.props.isLoggedIn ?
-                        <button type="button" className="btn btn-secondary btn-sm" onClick={() => {this.handleClick(strain.id)}}>Edit Strain</button> : ''
+                        <Link to="/view-strain" className="btn btn-secondary btn-sm">View Strain</Link> : ''
                       }
                   </div>
                   )
@@ -63,9 +63,11 @@ class MyStrains extends Component{
           <div className="addStrains">
             <h1>My Strains</h1>
             <div className="row">
-              {this.showProducts(this.state.strains)}
+              {this.showStrains(this.state.strains)}
             </div>
             <Link to="/add-strain" className="btn btn-success btn-lg">+ Add Strain</Link>
+            OR
+            <Link to="/add-strain" className="btn btn-success btn-lg">Scan QR Code <img className='img-thumbnail img-fluid' width="50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png" alt="example QR code"/></Link>
 
           </div>
           ) : (
