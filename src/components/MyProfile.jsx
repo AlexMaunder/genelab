@@ -72,7 +72,7 @@ class MyProfile extends Component{
   }
 
   render(){
-    const {email, password, password_confirmation, location} = this.state
+    const {email, password, password_confirmation} = this.state
 
     return(
       this.state.isChange ? < Redirect to='/' /> :
@@ -99,7 +99,7 @@ class MyProfile extends Component{
                     <input
                       className="form-control"
                       type="password"
-                      name="password_confirmation"
+                      name="password"
                       id="password"
                       placeholder="Password"
                       onChange={this.handleChange}
@@ -107,13 +107,13 @@ class MyProfile extends Component{
                     />
                   </div>
                   <div className="form-group">
-                    <label for="password-confirmation">Confirm Password</label>
+                    <label for="password_confirmation">Confirm Password</label>
                     <input
                       className="form-control"
                       type="password"
-                      name="password"
-                      id="password-confirmation"
-                      placeholder="Password"
+                      name="password_confirmation"
+                      id="password_confirmation"
+                      placeholder="Confirm Password"
                       onChange={this.handleChange}
                       value={this.state.password_confirmation}
                     />

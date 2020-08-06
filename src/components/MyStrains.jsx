@@ -77,7 +77,7 @@ class MyStrains extends Component{
             </Container>
             <Link to="/add-strain" className="btn btn-success btn-lg">+ Add Strain</Link>
             OR
-            <Link to="/add-strain" className="btn btn-success btn-lg">Scan QR Code <img className='img-thumbnail img-fluid' width="50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png" alt="example QR code"/></Link>
+            <Link to="/qr-code" className="btn btn-success btn-lg">Scan QR Code <img className='img-thumbnail img-fluid' width="50" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png" alt="example QR code"/></Link>
 
           </div>
           ) : (

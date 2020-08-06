@@ -44,7 +44,7 @@ class AddStrain extends Component{
   handleSubmit = (event) => {
     event.preventDefault()
     const {name, mating_type, morphology, gm, is_child, acid_tolerance, ferment_rate, traits, image} = this.state
-    let user = {
+    let strain = {
       name: name,
       mating_type: mating_type,
       morphology: morphology,
@@ -55,7 +55,7 @@ class AddStrain extends Component{
       traits: traits,
       image: image
     }
-    axios.patch(`${BACK_END_URL}/strains/new/${this.props.user.id}.json`, user, {withCredentials: true})
+    axios.post(`${BACK_END_URL}/strains`, strain)
     .then(response => {
       console.log(response)
       this.setState ({

@@ -9,6 +9,7 @@ import MyStrains from './MyStrains';
 import AddStrain from './AddStrain';
 import ViewStrain from './ViewStrain';
 import BuyStrain from './BuyStrain';
+import Camera from './Camera';
 import _ from 'lodash';
 
 
@@ -155,6 +156,10 @@ class App extends Component {
                   />
                   <Route exact path='/buy-strains' render={props => (
                     <BuyStrain {...props} {...this.state} user={this.state.user} readCookie={this.readCookie}
+                    loggedInStatus={this.state.isLoggedIn} />)}
+                  />
+                  <Route exact path='/qr-code' render={props => (
+                    <Camera {...props} {...this.state} user={this.state.user} readCookie={this.readCookie}
                     loggedInStatus={this.state.isLoggedIn} />)}
                   />
                   <Route exact path='/add-strain' render={props => (
