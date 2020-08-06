@@ -2,6 +2,7 @@ import React, {useState, Component}  from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import axios from 'axios';
 import _ from "lodash";
+import { Card, CardColumns } from 'react-bootstrap';
 import { render } from '@testing-library/react';
 import { config } from '../Constants' // get prod/dev urls
 let FRONT_END_URL = config.url.FRONT_END_URL;
@@ -32,18 +33,18 @@ class MyStrains extends Component{
   showProducts(strainsArray) {
       if(strainsArray) {
           return(
-              strainsArray.map((product) => {
-                // render product card
+              strainsArray.map((strain) => {
+                // render strain card
                 return(
-                  <div key={product.id} className='col-3 item'>
-                      <img className='thumbnail' src={product.image_url} alt={product.name}/>
-                      <h3 key={product.id} >{product.name.slice(0, 25)} ...</h3>
-                      <p>Category: {product.category}</p>
-                      <p>Quantity available: {product.quantity}</p>
-                      <p>{product.description.slice(0, 30)}...</p>
-                      <p>Posted: {Math.floor(Math.abs(new Date() - new Date(product.created_at))/1000/60/60/24)} days ago</p>
+                  <div key={strain.id} className='col-3 item'>
+                    <Card className="p-3">
+                      <Card.Img variant="top" className='img-thumbnail img-fluid' src={strain.image} alt={strain.name}/>
+                    </Card>
+                      <h3 key={strain.id} >{strain.name} ...</h3>
+                      <p>{strain.traits}...</p>
+                      <p>Created: {Math.floor(Math.abs(new Date() - new Date(strain.created_at))/1000/60/60/24)} days ago</p>
                       {this.props.isLoggedIn ?
-                        <button type="button" className="btn btn-success btn-sm" onClick={() => {this.handleClick(product.id)}}>Add a Strain</button> : ''
+                        <button type="button" className="btn btn-secondary btn-sm" onClick={() => {this.handleClick(strain.id)}}>Edit Strain</button> : ''
                       }
                   </div>
                   )
@@ -59,12 +60,12 @@ class MyStrains extends Component{
     return(
       <div className="myStrains">
         {this.props.loggedInStatus ? (
-          <div className="shoppingCart">
+          <div className="addStrains">
             <h1>My Strains</h1>
             <div className="row">
-              {this.showProducts(this.state.user_strains)}
+              {this.showProducts(this.state.strains)}
             </div>
-            <Link to="/add-strain" className="btn btn-success btn-sm">Add Strain</Link>
+            <Link to="/add-strain" className="btn btn-success btn-lg">+ Add Strain</Link>
 
           </div>
           ) : (

@@ -147,7 +147,11 @@ class App extends Component {
                     loggedInStatus={this.state.isLoggedIn} handleUserEdit={this.handleUserEdit}/>)}
                   />
                   <Route exact path='/my-strains' render={props => (
-                    <MyStrains {...props} user={this.state.user} readCookie={this.readCookie}
+                    <MyStrains {...props} {...this.state} user={this.state.user} readCookie={this.readCookie}
+                    loggedInStatus={this.state.isLoggedIn} viewStrain={this.viewStrain} />)}
+                  />
+                  <Route exact path='/add-strain' render={props => (
+                    <AddStrain {...props} {...this.state} user={this.state.user} readCookie={this.readCookie}
                     loggedInStatus={this.state.isLoggedIn} viewStrain={this.viewStrain} />)}
                   />
                   <Route exact path='/' render={props => (
