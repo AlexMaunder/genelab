@@ -7,7 +7,7 @@ class QRCamera extends Component {
   constructor(props){
     super(props)
     this.state = {
-      delay: 100,
+      delay: 50,
       result: 'No result',
       legacyMode: "active",
     }
