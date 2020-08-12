@@ -1,8 +1,8 @@
 // Constants.js
 const prod = {
     url: {
-        API_URL: "https://covid-co-op.herokuapp.com",
-        FRONT_END_URL: "https://joshjm.github.io/Covid-Co-op"
+        API_URL: "https://genelab-rails.herokuapp.com/",
+        FRONT_END_URL: "https://alexmaunder.github.io/genelab/"
      }
    };
 const dev = {

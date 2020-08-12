@@ -2,6 +2,8 @@
 To help with the organisation and tracking of Genetic Lab Strains.
 Visualise your strains phylogeny, purchase strains and easily add new strains.
 
+https://alexmaunder.github.io/genelab/
+
 **[Relational Model](https://docs.google.com/drawings/d/19rR_shnmXq3-8fINedSf1_5HKc0NyXGFbh7hTcxJJ8o/edit)**
 
 Back End: Ruby on Rails with Session login, PostrgreSQL
@@ -37,7 +39,7 @@ Stack:
 
 ### Roadmap:
 - [ ] Rebuild DB in Flask
-- [ ] deploy to heroku
+- [x] deploy to heroku
 - [ ]
 
 ## Tools
