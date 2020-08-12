@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e3865b8ec0ac52a1def3f3757a037447",
+    "revision": "c58ddd3732ee3fa7d205a73d7fd74ee6",
     "url": "/genelab/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/genelab/static/css/2.6118100d.chunk.css"
   },
   {
-    "revision": "01a527d7ed7f55d531f7",
+    "revision": "2e953eade1c9565871ec",
     "url": "/genelab/static/css/main.94f70c42.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/genelab/static/js/2.cbb6be07.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "01a527d7ed7f55d531f7",
-    "url": "/genelab/static/js/main.95fd7993.chunk.js"
+    "revision": "2e953eade1c9565871ec",
+    "url": "/genelab/static/js/main.449ef52a.chunk.js"
   },
   {
     "revision": "3bb82f7d7243ae3480ec",

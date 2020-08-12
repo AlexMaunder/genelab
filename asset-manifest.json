@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/genelab/static/css/main.94f70c42.chunk.css",
-    "main.js": "/genelab/static/js/main.95fd7993.chunk.js",
-    "main.js.map": "/genelab/static/js/main.95fd7993.chunk.js.map",
+    "main.js": "/genelab/static/js/main.449ef52a.chunk.js",
+    "main.js.map": "/genelab/static/js/main.449ef52a.chunk.js.map",
     "runtime-main.js": "/genelab/static/js/runtime-main.57826a52.js",
     "runtime-main.js.map": "/genelab/static/js/runtime-main.57826a52.js.map",
     "static/css/2.6118100d.chunk.css": "/genelab/static/css/2.6118100d.chunk.css",
     "static/js/2.cbb6be07.chunk.js": "/genelab/static/js/2.cbb6be07.chunk.js",
     "static/js/2.cbb6be07.chunk.js.map": "/genelab/static/js/2.cbb6be07.chunk.js.map",
     "index.html": "/genelab/index.html",
-    "precache-manifest.e10b643614faf53553ae45fb2b0af078.js": "/genelab/precache-manifest.e10b643614faf53553ae45fb2b0af078.js",
+    "precache-manifest.2d725bd05c969fbb4c902aaaafe745d1.js": "/genelab/precache-manifest.2d725bd05c969fbb4c902aaaafe745d1.js",
     "service-worker.js": "/genelab/service-worker.js",
     "static/css/2.6118100d.chunk.css.map": "/genelab/static/css/2.6118100d.chunk.css.map",
     "static/css/main.94f70c42.chunk.css.map": "/genelab/static/css/main.94f70c42.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.6118100d.chunk.css",
     "static/js/2.cbb6be07.chunk.js",
     "static/css/main.94f70c42.chunk.css",
-    "static/js/main.95fd7993.chunk.js"
+    "static/js/main.449ef52a.chunk.js"
   ]
 }
